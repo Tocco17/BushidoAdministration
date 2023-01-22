@@ -17,5 +17,7 @@
         "vue"
     ],
     "rules": {
+        "no-var":"error",
+        "no-unused-vars":"warn"
     }
 }
