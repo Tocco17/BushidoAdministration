@@ -3,9 +3,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
 	name: 'HomeComponent',
-	data() {
-		return {};
-	},
+	data() {},
 });
 </script>
 
