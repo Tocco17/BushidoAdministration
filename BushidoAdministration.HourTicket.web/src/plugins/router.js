@@ -1,14 +1,16 @@
+// ts-check
+import Home from '../views/Home.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 
-const home = {template: '<div>Home</div>'}
 
 const routes = [
-    { path: '/', component: home},
+    { path: '/', component: Home},
 ]
 
 const router = createRouter({
-    history: createWebHistory,
+    history: createWebHistory(),
     routes
 })
-
 export default router
+
+
