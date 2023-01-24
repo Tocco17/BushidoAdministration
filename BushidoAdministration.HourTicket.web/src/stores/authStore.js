@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { localStoragePlugin } from '../plugins/localStoragePlugin'
 import router from '../plugins/router'
 
 export const useAuthStore = defineStore('auth', {
@@ -10,7 +11,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         login(username, password, inLocalStorage) {
             if (inLocalStorage)
-                localStorage.setItem('auth', { username, password })
+                localStoragePlugin.write('auth', {username, password})
 
             return new Promise((resolve, reject) => {
                 this._isLogged = true;
@@ -20,12 +21,23 @@ export const useAuthStore = defineStore('auth', {
         logout() {
             this._isLogged = false;
             localStorage.clear();
-            router.push('/login');
-        }
+            router.push('/Login');
+        },
+        
+        getRole(username){
+            if(!username) username = localStoragePlugin.read('auth.username') 
+            
+            //TODO: add API for role management
+
+            return username === 'Tocco' ? 'admin' : 'coach'
+        },
     },
     getters: {
         isLogged() {
-            return this._isLogged || !!localStorage.getItem('auth')
+            return this._isLogged || !!localStoragePlugin.read('auth')
+        },
+        isAdmin() {
+            return this.isLogged && this.getRole() === 'admin'
         }
     }
 })
