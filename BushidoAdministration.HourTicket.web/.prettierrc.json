@@ -3,5 +3,5 @@
     "singleQuote": true,
     "useTabs": true,
     "semi": true,
-    "singleAttributePerLine": false
+    "singleAttributePerLine": true
 }

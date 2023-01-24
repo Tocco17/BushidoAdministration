@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 // import './style.css'
-import './input.css'
+// import './input.css'
 import App from './App.vue'
 import router from './plugins/router'
 import pinia from './plugins/pinia'

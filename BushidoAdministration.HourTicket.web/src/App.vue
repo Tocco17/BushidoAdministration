@@ -25,14 +25,23 @@ export default defineComponent({
 		activePage(path) {
 			if (this.isCurrentPage(path)) return 'text-purple-500';
 		},
+		checkAuthorization(path) {
+			// console.log(this.$route);
+			console.log(this.$router);
+			console.log(this.$router.getRoutes());
+			const routerPath = this.$router
+				.getRoutes()
+				.find((r) => r.path === path);
+			return !routerPath.meta.requiresAdmin;
+		},
 	},
 	computed: {
 		pageClass() {
 			if (this.isCurrentPage('/login'))
 				return 'flex flex-row flex-wrap justify-center content-start';
 
-			if (this.isCurrentPage('/Articles'))
-				return 'flex flex-col flex-wrap justify-start';
+			// if (this.isCurrentPage('/Articles'))
+			// 	return 'flex flex-col flex-wrap justify-start';
 		},
 	},
 });
@@ -78,26 +87,19 @@ export default defineComponent({
 							to="/"
 							class="md:p-4 py-2 block hover:text-purple-400"
 							:class="activePage('/')"
+							v-if="checkAuthorization('/')"
 						>
 							Home
 						</router-link>
 					</li>
 					<li>
 						<router-link
-							to="/Articles"
+							to="/Calendar"
 							class="md:p-4 py-2 block hover:text-purple-400"
-							:class="activePage('/Articles')"
+							:class="activePage('/Calendar')"
+							v-if="checkAuthorization('/Calendar')"
 						>
-							Articles
-						</router-link>
-					</li>
-					<li>
-						<router-link
-							to="/Recipies"
-							class="md:p-4 py-2 block hover:text-purple-400"
-							:class="activePage('/Recipies')"
-						>
-							Recipies
+							Calendar
 						</router-link>
 					</li>
 					<li>
@@ -113,7 +115,10 @@ export default defineComponent({
 		</nav>
 	</header>
 
-	<div class="bg-gray-400 min-h-screen p-5" :class="pageClass">
+	<div
+		class="bg-gray-400 min-h-screen p-5"
+		:class="pageClass"
+	>
 		<router-view />
 	</div>
 </template>
