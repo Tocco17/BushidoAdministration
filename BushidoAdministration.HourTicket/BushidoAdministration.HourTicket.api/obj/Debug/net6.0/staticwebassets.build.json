@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "U7sphXtoWkFeDSx/rBN2uai4+VIOcgp68NN5+T0jIFg=",
+  "Source": "BushidoAdministration.HourTicket.api",
+  "BasePath": "_content/BushidoAdministration.HourTicket.api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

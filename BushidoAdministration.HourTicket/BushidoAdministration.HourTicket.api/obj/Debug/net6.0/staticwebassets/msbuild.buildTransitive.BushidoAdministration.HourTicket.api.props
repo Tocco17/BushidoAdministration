@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BushidoAdministration.HourTicket.api.props" />
+</Project>
