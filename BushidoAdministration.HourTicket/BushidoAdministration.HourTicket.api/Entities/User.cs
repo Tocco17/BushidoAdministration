@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using BushidoAdministration.HourTicket.api.Enum;
 
 namespace BushidoAdministration.HourTicket.api.Entities
 {
@@ -23,6 +24,6 @@ namespace BushidoAdministration.HourTicket.api.Entities
 		public string LastName { get; set; } = string.Empty;
 
 		[Column(name: "role_level")]
-		public int RoleLevel { get; set; }
+		public RoleLevelEnum RoleLevel { get; set; }
 	}
 }
