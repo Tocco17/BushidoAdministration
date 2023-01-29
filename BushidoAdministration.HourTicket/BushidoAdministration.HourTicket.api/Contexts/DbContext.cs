@@ -51,7 +51,7 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 		{
 			using (var conn = CreateConnection())
 			{
-				return await conn.QuerySingleOrDefaultAsync(query);
+				return await conn.QuerySingleOrDefaultAsync<T>(query);
 			}
 		}
 
