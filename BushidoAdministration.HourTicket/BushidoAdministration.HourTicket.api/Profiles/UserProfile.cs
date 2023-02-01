@@ -6,7 +6,8 @@ namespace BushidoAdministration.HourTicket.api.Profiles
 	{
 		public UserProfile()
 		{
-			CreateMap<Entities.User, Models.UserLoggedDto>();
+			CreateMap<Entities.User, Models.UserDto>();
+			CreateMap<Models.UserUpdatedDto, Entities.User>();
 		}
 	}
 }

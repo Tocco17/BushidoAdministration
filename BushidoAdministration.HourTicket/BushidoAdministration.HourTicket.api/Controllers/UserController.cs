@@ -18,7 +18,7 @@ namespace BushidoAdministration.HourTicket.api.Controllers
 		}
 
 		[HttpGet("login")]
-		public async Task<ActionResult<UserLoggedDto>> Login(string username, string password)
+		public async Task<ActionResult<UserDto>> Login(string username, string password)
 		{
 			try
 			{
