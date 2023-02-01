@@ -1,4 +1,7 @@
-﻿using BushidoAdministration.HourTicket.api.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using BushidoAdministration.HourTicket.api.Entities;
+using BushidoAdministration.HourTicket.api.Enum;
+using BushidoAdministration.HourTicket.api.Models;
 using BushidoAdministration.HourTicket.api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +56,123 @@ namespace BushidoAdministration.HourTicket.api.Controllers
 
 				return StatusCode(500);
 			}
+		}
+
+		[HttpGet("rolelevel")]
+		public async Task<ActionResult<RoleLevelEnum?>> GetRoleLevel(int userId)
+		{
+			try
+			{
+				_logger.LogInformation($"Tentativo di vedere ruolo dell'account con id {userId}: inizio.");
+
+				var roleLevel = await _userService.GetRoleLevel(userId);
+
+				if (roleLevel == null)
+				{
+					_logger.LogInformation($"Tentativo di vedere ruolo dell'account con id {userId}: livello del ruolo non trovato.");
+					return NotFound();
+				}
+
+				_logger.LogInformation($"Tentativo di vedere ruolo dell'account con id {userId}: avvenuto con successo.");
+				return Ok(roleLevel);
+			}
+			catch (Exception ex)
+			{
+				string errorMessage = $"Tentativo di vedere ruolo dell'account con id {userId}: fallito\nMessaggio di errore: " +
+					ex.Message;
+				_logger.LogError(errorMessage);
+
+				return StatusCode(500);
+			}
+		}
+
+		[HttpPut("update")]
+		public async Task<ActionResult<UserDto>> UpdateUser([FromBody] UserUpdatedDto userUpdate)
+		{
+			var logMex = $"Tentativo di modifica dell'utente con id {userUpdate.Id}:";
+			try
+			{
+				_logger.LogInformation($"{logMex} Inizio");
+
+				//Check if the user exists
+				if (!(await _userService.UserExistsFromId(userUpdate.Id)))
+				{
+					_logger.LogWarning($"{logMex} User not found.");
+					return BadRequest("User not found.");
+				}
+
+				var res = await _userService.Update(userUpdate);
+
+				if (!res)
+				{
+					_logger.LogWarning(logMex + "Fallito senza eccezioni");
+					return StatusCode(500);
+				}
+				_logger.LogInformation(logMex + "Successo");
+
+				var userUpdated = await _userService.GetUserFromId(userUpdate.Id);
+
+				return Ok(userUpdated);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError($"{logMex} fallito\n" +
+					$"Messaggio di errore: {ex.Message}");
+
+				return StatusCode(500);
+			}
+		}
+
+		[HttpPut("update/password")]
+		public async Task<ActionResult> UpdatePassword([FromBody] UserUpdatePasswordDto userUpdatePassword)
+		{
+			var logMex = $"Tentativo di modifica PASSWORD dell'utente con id {userUpdatePassword.Id}:";
+			try
+			{
+				_logger.LogInformation($"{logMex} Inizio");
+
+				//Check if user exists
+				if (!(await _userService.UserExistsFromId(userUpdatePassword.Id)))
+				{
+					_logger.LogWarning($"{logMex} User not found.");
+					return BadRequest("User not found.");
+				}
+
+				//Check if the old password is correct
+				if (!(await _userService.UserExistsFromIdAndPassword(userUpdatePassword.Id, userUpdatePassword.OldPassword)))
+				{
+					_logger.LogWarning($"{logMex} Incorrect old password.");
+					return BadRequest("Incorrect old password.");
+				}
+
+				var res = await _userService.UpdatePassword(userUpdatePassword);
+
+				if (!res)
+				{
+					_logger.LogWarning(logMex + "Fallito senza eccezioni");
+					return StatusCode(500);
+				}
+
+				_logger.LogInformation(logMex + "Successo");
+				return NoContent();
+
+			}
+			catch (AccessViolationException ex)
+			{
+				_logger.LogError($"{logMex} fallito\n" +
+					$"Messaggio di errore: {ex.Message}");
+
+				return BadRequest(ex.Message);
+			}
+			catch (Exception ex)
+			{
+
+				_logger.LogError($"{logMex} fallito\n" +
+					$"Messaggio di errore: {ex.Message}");
+
+				return StatusCode(500);
+			}
+
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System.Net.WebSockets;
 using BushidoAdministration.HourTicket.api.Contexts;
 using BushidoAdministration.HourTicket.api.Entities;
+using BushidoAdministration.HourTicket.api.Enum;
 
 namespace BushidoAdministration.HourTicket.api.Repositories
 {
@@ -43,6 +44,82 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			var user = await _context.GetSingleAsync<User>(query);
 
 			return user;
+		}
+
+		public async Task<RoleLevelEnum?> GetRoleLevel(int userId)
+		{
+			var query = $"select top(1) {_roleLevel} from dbo.users where id = {userId}";
+			return await _context.GetSingleAsync<RoleLevelEnum?>(query);
+		}
+
+		public async Task<User> GetUserFromId(int userId)
+		{
+			var query = $"select top(1) " +
+				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
+				$"from dbo.users where id = {userId}";
+			var user = await _context.GetSingleAsync<User>(query);
+			return user;
+		}
+
+		public async Task<User> GetUserFromEmail(string email)
+		{
+			var query = $"select top(1) " +
+				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
+				$"from dbo.users where email = '{email}'";
+			var user = await _context.GetSingleAsync<User>(query);
+			return user;
+		}
+
+		public async Task<User> GetUserFromUsername(string username)
+		{
+			var query = $"select top(1) " +
+				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
+				$"from dbo.users where username = '{username}'";
+			var user = await _context.GetSingleAsync<User>(query);
+			return user;
+		}
+
+		public async Task<bool> Update(User userUpdated)
+		{
+			var query = " update dbo.users set";
+			if (userUpdated.Username != string.Empty) query += $" username = '{userUpdated.Username}',";
+			if (userUpdated.Email != string.Empty) query += $" email = '{userUpdated.Email}',";
+			if (userUpdated.FirstName != string.Empty) query += $" first_name = '{userUpdated.FirstName}',";
+			if (userUpdated.LastName != string.Empty) query += $" last_name = '{userUpdated.LastName}',";
+			query = query.Remove(query.Length - 1); //Per togliere la virgola
+			query += $" where id = {userUpdated.Id}";
+
+			return await _context.Update(query);
+		}
+
+		public async Task<bool> UpdatePassword(int userId, string oldPassword, string newPassword)
+		{
+			var query = $"update dbo.users set password = '{newPassword}' where id = {userId} and password = '{oldPassword}'";
+			return await _context.Update(query);
+		}
+
+		public async Task<bool> UserExistsFromId(int userId)
+		{
+			var user = await GetUserFromId(userId);
+			return user != null;
+		}
+
+		public async Task<bool> UserExistsFromUsername(string username)
+		{
+			var user = await GetUserFromUsername(username);
+			return user != null;
+		}
+
+		public async Task<bool> UserExistsFromEmail(string email)
+		{
+			var user = await GetUserFromEmail(email);
+			return user != null;
+		}
+
+		public async Task<bool> UserExistsFromIdAndPassword(int userId, string password)
+		{
+			var user = await GetUserFromId(userId);
+			return user.Password == password;
 		}
 	}
 }
