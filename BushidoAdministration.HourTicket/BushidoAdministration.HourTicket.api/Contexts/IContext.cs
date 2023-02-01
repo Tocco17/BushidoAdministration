@@ -12,6 +12,8 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 		public Task<IEnumerable<T>> GetAsync<T>(string storedProcedure, DynamicParameters parameters);
 		public Task<T> GetSingleAsync<T>(string query);
 		public Task<T> GetSingleAsync<T>(string storedProcedure, DynamicParameters parameters);
+		public Task<bool> Update(string query);
+		public Task<bool> Update(string storedProcedure, DynamicParameters parameters);
 
 	}
 }

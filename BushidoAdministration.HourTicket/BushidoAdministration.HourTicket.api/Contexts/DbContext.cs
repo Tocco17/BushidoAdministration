@@ -17,36 +17,7 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 			_connectionString = _configuration.GetConnectionString("SqlConnection");
 		}
 
-	//	private T ConvertSingle<T>(dynamic result)
-	//	{
-	//		T converted;
-
-	//		var type = typeof(T);
-	//		var properties = type.GetProperties();
-	//		foreach(var property in properties)
-	//		{
-	//			var columnAttribute = property
-	//				.GetCustomAttributes(false)
-	//				.OfType<ColumnAttribute>()
-	//				.FirstOrDefault();
-
-	//			var name = columnAttribute?.Name;
-
-	//			//converted[name]
-	//		}
-	//		Dapper.SqlMapper.SetTypeMap(
-	//typeof(T),
-	//new CustomPropertyTypeMap(
-	//	typeof(T),
-	//	(type, columnName) =>
-	//		type.GetProperties().FirstOrDefault(prop =>
-	//			prop.GetCustomAttributes(false)
-	//				.OfType<ColumnAttribute>()
-	//				.Any(attr => attr.Name == columnName))));
-
-	//		return converted;
-	//	}
-
+		#region PRIVATE COMMON METHODS
 		private async Task<T> SelectSingle<T>(string query)
 		{
 			using (var conn = CreateConnection())
@@ -79,6 +50,15 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 			}
 		}
 
+		private async Task<int> Execute(string query)
+		{
+			using (var conn = CreateConnection())
+			{
+				return await conn.ExecuteAsync(query);
+			}
+		}
+		#endregion
+
 		public async Task<T> CreateAsync<T>(string query)
 		{
 			return await SelectSingle<T>(query);
@@ -109,6 +89,17 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 		public async Task<T> GetSingleAsync<T>(string storedProcedure, DynamicParameters parameters)
 		{
 			return await SelectSingle<T>(storedProcedure, parameters);
+		}
+
+		public async Task<bool> Update(string query)
+		{
+			var res = await Execute(query);
+			return res > 0;
+		}
+
+		public Task<bool> Update(string storedProcedure, DynamicParameters parameters)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
