@@ -41,8 +41,20 @@ builder.Services
 
 builder.Services.AddSingleton<IContext, DbContext>();
 
+//builder.Services.AddScoped<IActivityService, ActivityService>();
+//builder.Services.AddScoped<IAttendenceService, AttendenceService>();
+//builder.Services.AddScoped<IExtraAttendencyService, ExtraAttendencyService>();
+//builder.Services.AddScoped<IExtraScheduleService, ExtraScheduleService>();
+//builder.Services.AddScoped<IPaymentService, PaymentService>();
+//builder.Services.AddScoped<IRegularScheduleService, RegularScheduleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+builder.Services.AddScoped<IAttendenceRepository, AttendenceRepository>();
+builder.Services.AddScoped<IExtraAttendencyRepository, ExtraAttendencyRepository>();
+builder.Services.AddScoped<IExtraScheduleRepository, ExtraScheduleRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IRegularScheduleRepository, RegularScheduleRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
