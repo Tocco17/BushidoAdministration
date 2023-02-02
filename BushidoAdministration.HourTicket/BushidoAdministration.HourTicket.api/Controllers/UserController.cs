@@ -59,7 +59,7 @@ namespace BushidoAdministration.HourTicket.api.Controllers
 		}
 
 		[HttpGet("rolelevel")]
-		public async Task<ActionResult<RoleLevelEnum?>> GetRoleLevel(int userId)
+		public async Task<ActionResult<RoleLevel?>> GetRoleLevel(int userId)
 		{
 			try
 			{

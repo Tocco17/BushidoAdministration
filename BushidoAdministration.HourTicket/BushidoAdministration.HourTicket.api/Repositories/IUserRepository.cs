@@ -10,7 +10,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public Task<User> GetUserFromId(int userId);
 		public Task<User> GetUserFromEmail(string email);
 		public Task<User> GetUserFromUsername(string username);
-		public Task<RoleLevelEnum?> GetRoleLevel(int userId);
+		public Task<RoleLevel?> GetRoleLevel(int userId);
 		public Task<bool> Update(User userUpdated);
 		public Task<bool> UpdatePassword(int userId, string oldPassword, string newPassword);
 		public Task<bool> UserExistsFromId(int userId);

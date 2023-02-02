@@ -24,6 +24,6 @@ namespace BushidoAdministration.HourTicket.api.Entities
 		public string LastName { get; set; } = string.Empty;
 
 		[Column(name: "role_level")]
-		public RoleLevelEnum RoleLevel { get; set; }
+		public RoleLevel RoleLevel { get; set; }
 	}
 }

@@ -31,7 +31,7 @@ namespace BushidoAdministration.HourTicket.api.Services
 			return userModel;
 		}
 
-		public async Task<RoleLevelEnum?> GetRoleLevel(int userId)
+		public async Task<RoleLevel?> GetRoleLevel(int userId)
 		{
 			return await _userRepository.GetRoleLevel(userId);
 		}

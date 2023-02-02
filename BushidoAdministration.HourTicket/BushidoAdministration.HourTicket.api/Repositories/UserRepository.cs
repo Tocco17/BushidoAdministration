@@ -46,10 +46,10 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			return user;
 		}
 
-		public async Task<RoleLevelEnum?> GetRoleLevel(int userId)
+		public async Task<RoleLevel?> GetRoleLevel(int userId)
 		{
 			var query = $"select top(1) {_roleLevel} from dbo.users where id = {userId}";
-			return await _context.GetSingleAsync<RoleLevelEnum?>(query);
+			return await _context.GetSingleAsync<RoleLevel?>(query);
 		}
 
 		public async Task<User> GetUserFromId(int userId)

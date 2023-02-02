@@ -9,6 +9,6 @@ namespace BushidoAdministration.HourTicket.api.Models
 		public string Email { get; set; } = string.Empty;
 		public string FirstName { get; set; } = string.Empty;
 		public string LastName { get; set; } = string.Empty;
-		public RoleLevelEnum RoleLevel { get; set; }
+		public RoleLevel RoleLevel { get; set; }
 	}
 }

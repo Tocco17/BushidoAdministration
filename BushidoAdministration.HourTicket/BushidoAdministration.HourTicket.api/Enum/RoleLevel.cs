@@ -1,6 +1,6 @@
 ﻿namespace BushidoAdministration.HourTicket.api.Enum
 {
-	public enum RoleLevelEnum
+	public enum RoleLevel
 	{
 		Admin = 1,
 		Coach

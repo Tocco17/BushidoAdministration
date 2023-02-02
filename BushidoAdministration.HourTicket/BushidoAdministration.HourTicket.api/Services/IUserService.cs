@@ -11,7 +11,7 @@ namespace BushidoAdministration.HourTicket.api.Services
 		public Task<UserDto> GetUserFromId(int userId);
 		public Task<UserDto> GetUserFromEmail(string email);
 		public Task<UserDto> GetUserFromUsername(string username);
-		public Task<RoleLevelEnum?> GetRoleLevel(int userId);
+		public Task<RoleLevel?> GetRoleLevel(int userId);
 		public Task<bool> Update(UserUpdatedDto userUpdated);
 		public Task<bool> UpdatePassword(UserUpdatePasswordDto userUpdatePassword);
 		public Task<bool> UserExistsFromId(int userId);
