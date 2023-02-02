@@ -52,7 +52,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			return await _context.GetSingleAsync<RoleLevel?>(query);
 		}
 
-		public async Task<User> GetUserFromId(int userId)
+		public async Task<User> GetFromId(int userId)
 		{
 			var query = $"select top(1) " +
 				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
@@ -61,7 +61,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			return user;
 		}
 
-		public async Task<User> GetUserFromEmail(string email)
+		public async Task<User> GetFromEmail(string email)
 		{
 			var query = $"select top(1) " +
 				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
@@ -70,7 +70,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			return user;
 		}
 
-		public async Task<User> GetUserFromUsername(string username)
+		public async Task<User> GetFromUsername(string username)
 		{
 			var query = $"select top(1) " +
 				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
@@ -98,27 +98,27 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			return await _context.Update(query);
 		}
 
-		public async Task<bool> UserExistsFromId(int userId)
+		public async Task<bool> ExistsFromId(int userId)
 		{
-			var user = await GetUserFromId(userId);
+			var user = await GetFromId(userId);
 			return user != null;
 		}
 
-		public async Task<bool> UserExistsFromUsername(string username)
+		public async Task<bool> ExistsFromUsername(string username)
 		{
-			var user = await GetUserFromUsername(username);
+			var user = await GetFromUsername(username);
 			return user != null;
 		}
 
-		public async Task<bool> UserExistsFromEmail(string email)
+		public async Task<bool> ExistsFromEmail(string email)
 		{
-			var user = await GetUserFromEmail(email);
+			var user = await GetFromEmail(email);
 			return user != null;
 		}
 
-		public async Task<bool> UserExistsFromIdAndPassword(int userId, string password)
+		public async Task<bool> ExistsFromIdAndPassword(int userId, string password)
 		{
-			var user = await GetUserFromId(userId);
+			var user = await GetFromId(userId);
 			return user.Password == password;
 		}
 	}

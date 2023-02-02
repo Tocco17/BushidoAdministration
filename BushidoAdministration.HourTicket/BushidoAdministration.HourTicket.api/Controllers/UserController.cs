@@ -95,7 +95,7 @@ namespace BushidoAdministration.HourTicket.api.Controllers
 				_logger.LogInformation($"{logMex} Inizio");
 
 				//Check if the user exists
-				if (!(await _userService.UserExistsFromId(userUpdate.Id)))
+				if (!(await _userService.ExistsFromId(userUpdate.Id)))
 				{
 					_logger.LogWarning($"{logMex} User not found.");
 					return BadRequest("User not found.");
@@ -110,7 +110,7 @@ namespace BushidoAdministration.HourTicket.api.Controllers
 				}
 				_logger.LogInformation(logMex + "Successo");
 
-				var userUpdated = await _userService.GetUserFromId(userUpdate.Id);
+				var userUpdated = await _userService.GetFromId(userUpdate.Id);
 
 				return Ok(userUpdated);
 			}
@@ -132,14 +132,14 @@ namespace BushidoAdministration.HourTicket.api.Controllers
 				_logger.LogInformation($"{logMex} Inizio");
 
 				//Check if user exists
-				if (!(await _userService.UserExistsFromId(userUpdatePassword.Id)))
+				if (!(await _userService.ExistsFromId(userUpdatePassword.Id)))
 				{
 					_logger.LogWarning($"{logMex} User not found.");
 					return BadRequest("User not found.");
 				}
 
 				//Check if the old password is correct
-				if (!(await _userService.UserExistsFromIdAndPassword(userUpdatePassword.Id, userUpdatePassword.OldPassword)))
+				if (!(await _userService.ExistsFromIdAndPassword(userUpdatePassword.Id, userUpdatePassword.OldPassword)))
 				{
 					_logger.LogWarning($"{logMex} Incorrect old password.");
 					return BadRequest("Incorrect old password.");

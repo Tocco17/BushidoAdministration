@@ -37,23 +37,23 @@ namespace BushidoAdministration.HourTicket.api.Services
 		}
 
 
-		public async Task<UserDto> GetUserFromId(int userId)
+		public async Task<UserDto> GetFromId(int userId)
 		{
-			var userEntity = await _userRepository.GetUserFromId(userId);
+			var userEntity = await _userRepository.GetFromId(userId);
 			var userDto = _mapper.Map<UserDto>(userEntity);
 			return userDto;
 		}
 
-		public async Task<UserDto> GetUserFromEmail(string email)
+		public async Task<UserDto> GetFromEmail(string email)
 		{
-			var userEntity = await _userRepository.GetUserFromEmail(email);
+			var userEntity = await _userRepository.GetFromEmail(email);
 			var userDto = _mapper.Map<UserDto>(userEntity);
 			return userDto;
 		}
 
-		public async Task<UserDto> GetUserFromUsername(string username)
+		public async Task<UserDto> GetFromUsername(string username)
 		{
-			var userEntity = await _userRepository.GetUserFromUsername(username);
+			var userEntity = await _userRepository.GetFromUsername(username);
 			return _mapper.Map<UserDto>(userEntity);
 		}
 
@@ -68,24 +68,24 @@ namespace BushidoAdministration.HourTicket.api.Services
 			return await _userRepository.UpdatePassword(userUpdatePassword.Id, userUpdatePassword.OldPassword, userUpdatePassword.NewPassword);
 		}
 
-		public async Task<bool> UserExistsFromId(int userId)
+		public async Task<bool> ExistsFromId(int userId)
 		{
-			return await _userRepository.UserExistsFromId(userId);
+			return await _userRepository.ExistsFromId(userId);
 		}
 
-		public async Task<bool> UserExistsFromUsername(string username)
+		public async Task<bool> ExistsFromUsername(string username)
 		{
-			return await _userRepository.UserExistsFromUsername(username);
+			return await _userRepository.ExistsFromUsername(username);
 		}
 
-		public async Task<bool> UserExistsFromEmail(string email)
+		public async Task<bool> ExistsFromEmail(string email)
 		{
-			return await _userRepository.UserExistsFromEmail(email);
+			return await _userRepository.ExistsFromEmail(email);
 		}
 
-		public async Task<bool> UserExistsFromIdAndPassword(int userId, string password)
+		public async Task<bool> ExistsFromIdAndPassword(int userId, string password)
 		{
-			return await _userRepository.UserExistsFromIdAndPassword(userId, password);
+			return await _userRepository.ExistsFromIdAndPassword(userId, password);
 		}
 	}
 }
