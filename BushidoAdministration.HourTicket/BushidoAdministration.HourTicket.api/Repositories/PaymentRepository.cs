@@ -1,9 +1,17 @@
-﻿using BushidoAdministration.HourTicket.api.Entities;
+﻿using BushidoAdministration.HourTicket.api.Contexts;
+using BushidoAdministration.HourTicket.api.Entities;
 
 namespace BushidoAdministration.HourTicket.api.Repositories
 {
 	public class PaymentRepository : IPaymentRepository
 	{
+		private readonly IContext _context;
+
+		public PaymentRepository(IContext context)
+		{
+			_context = context;
+		}
+
 		public Task<bool> Create(Payment payment)
 		{
 			throw new NotImplementedException();

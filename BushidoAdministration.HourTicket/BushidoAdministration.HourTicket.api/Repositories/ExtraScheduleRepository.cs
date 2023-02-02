@@ -1,9 +1,17 @@
-﻿using BushidoAdministration.HourTicket.api.Entities;
+﻿using BushidoAdministration.HourTicket.api.Contexts;
+using BushidoAdministration.HourTicket.api.Entities;
 
 namespace BushidoAdministration.HourTicket.api.Repositories
 {
 	public class ExtraScheduleRepository : IExtraScheduleRepository
 	{
+		private readonly IContext _context;
+
+		public ExtraScheduleRepository(IContext context)
+		{
+			_context = context;
+		}
+
 		public Task<bool> Create(ExtraSchedule extraSchedule)
 		{
 			throw new NotImplementedException();

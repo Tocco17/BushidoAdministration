@@ -1,9 +1,17 @@
-﻿using BushidoAdministration.HourTicket.api.Entities;
+﻿using BushidoAdministration.HourTicket.api.Contexts;
+using BushidoAdministration.HourTicket.api.Entities;
 
 namespace BushidoAdministration.HourTicket.api.Repositories
 {
 	public class ExtraAttendencyRepository : IExtraAttendencyRepository
 	{
+		private readonly IContext _context;
+
+		public ExtraAttendencyRepository(IContext context)
+		{
+			_context = context;
+		}
+
 		public Task<bool> ChangeJustified(int id)
 		{
 			throw new NotImplementedException();

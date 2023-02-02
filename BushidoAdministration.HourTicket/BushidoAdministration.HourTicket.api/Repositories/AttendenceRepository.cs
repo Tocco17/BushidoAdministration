@@ -1,9 +1,17 @@
-﻿using BushidoAdministration.HourTicket.api.Entities;
+﻿using BushidoAdministration.HourTicket.api.Contexts;
+using BushidoAdministration.HourTicket.api.Entities;
 
 namespace BushidoAdministration.HourTicket.api.Repositories
 {
 	public class AttendenceRepository : IAttendenceRepository
 	{
+		private readonly IContext _context;
+
+		public AttendenceRepository(IContext context)
+		{
+			_context = context;
+		}
+
 		public Task<bool> Create(Attendence attendence)
 		{
 			throw new NotImplementedException();
