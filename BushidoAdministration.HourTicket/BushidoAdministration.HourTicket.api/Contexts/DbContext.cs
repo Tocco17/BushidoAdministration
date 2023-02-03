@@ -1,7 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using System.Collections;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 namespace BushidoAdministration.HourTicket.api.Contexts
@@ -57,6 +55,14 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 				return await conn.ExecuteAsync(query);
 			}
 		}
+
+		private async Task<int> Execute(string storedProcedure, DynamicParameters parameters)
+		{
+			using (var conn = CreateConnection())
+			{
+				return await conn.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+			}
+		}
 		#endregion
 
 		public async Task<T> CreateAsync<T>(string query)
@@ -91,15 +97,28 @@ namespace BushidoAdministration.HourTicket.api.Contexts
 			return await SelectSingle<T>(storedProcedure, parameters);
 		}
 
-		public async Task<bool> Update(string query)
+		public async Task<bool> UpdateAsync(string query)
 		{
 			var res = await Execute(query);
 			return res > 0;
 		}
 
-		public Task<bool> Update(string storedProcedure, DynamicParameters parameters)
+		public async Task<bool> UpdateAsync(string storedProcedure, DynamicParameters parameters)
 		{
-			throw new NotImplementedException();
+			var res = await Execute(storedProcedure, parameters);
+			return res > 0;
+		}
+
+		public async Task<bool> DeleteAsync(string query)
+		{
+			var res = await Execute(query);
+			return res > 0;
+		}
+
+		public async Task<bool> DeleteAsync(string storedProcedure, DynamicParameters parameters)
+		{
+			var res = await Execute(storedProcedure, parameters);
+			return res > 0;
 		}
 	}
 }
