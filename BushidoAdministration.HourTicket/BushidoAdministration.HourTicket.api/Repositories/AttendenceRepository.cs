@@ -7,6 +7,8 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _table = "dbo.attendences";
+
 		private readonly string _id = " id as Id ";
 		private readonly string _userId = " user_id as UserId ";
 		private readonly string _activityId = " activity_id as ActivityId ";
@@ -18,39 +20,52 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			_context = context;
 		}
 
-		public Task<bool> Create(Attendence attendence)
+		public async Task<Attendence> Create(Attendence attendence)
 		{
-			throw new NotImplementedException();
+			var query = $"insert into {_table} (user_id, activity_id, day, time) " +
+				$"values ({attendence.UserId}, {attendence.ActivityId}, {attendence.Day}, {attendence.Time})";
+			return await _context.CreateAsync<Attendence>(query);
 		}
 
-		public Task<bool> Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"delete from {_table} where id = {id}";
+			return await _context.DeleteAsync(query);
 		}
 
-		public Task<Attendence> Get(int id)
+		public async Task<Attendence> Get(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"select top(1) {_id}, {_userId}, {_activityId}, {_day}, {_time} from {_table} where id = {id}";
+			return await _context.GetSingleAsync<Attendence>(query);
 		}
 
-		public Task<IEnumerable<Attendence>> Get(int userID, int acitivityId)
+		public async Task<IEnumerable<Attendence>> Get(int userId, int activityId)
 		{
-			throw new NotImplementedException();
+			var query = $"select {_id}, {_userId}, {_activityId}, {_day}, {_time} from {_table} where user_id = {userId} and activity_id = {activityId}";
+			return await _context.GetAsync<Attendence>(query);
 		}
 
-		public Task<IEnumerable<Attendence>> GetFromActivity(int activityId)
+		public async Task<IEnumerable<Attendence>> GetFromActivity(int activityId)
 		{
-			throw new NotImplementedException();
+			var query = $"select {_id}, {_userId}, {_activityId}, {_day}, {_time} from {_table} where activity_id = {activityId}";
+			return await _context.GetAsync<Attendence>(query);
 		}
 
-		public Task<IEnumerable<Attendence>> GetFromUser(int userId)
+		public async Task<IEnumerable<Attendence>> GetFromUser(int userId)
 		{
-			throw new NotImplementedException();
+			var query = $"select {_id}, {_userId}, {_activityId}, {_day}, {_time} from {_table} where user_id = {userId}";
+			return await _context.GetAsync<Attendence>(query);
 		}
 
-		public Task<bool> Update(Attendence attendence)
+		public async Task<bool> Update(Attendence attendence)
 		{
-			throw new NotImplementedException();
+			var query = $"update {_table} set "
+				+ $" user_id = {attendence.UserId},"
+				+ $" activity_id = {attendence.ActivityId},"
+				+ $" day = {attendence.Day},"
+				+ $" time = {attendence.Time}"
+				+ $" where id = {attendence.Id}";
+			return await _context.UpdateAsync(query);
 		}
 	}
 }

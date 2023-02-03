@@ -4,7 +4,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 {
 	public interface IAttendenceRepository
 	{
-		public Task<bool> Create(Attendence attendence);
+		public Task<Attendence> Create(Attendence attendence);
 
 		/// <summary>
 		/// Get single attendence from its id
@@ -16,10 +16,10 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		/// <summary>
 		/// Get all attendences based on the user and the activity
 		/// </summary>
-		/// <param name="userID"></param>
+		/// <param name="userId"></param>
 		/// <param name="acitivityId"></param>
 		/// <returns></returns>
-		public Task<IEnumerable<Attendence>> Get(int userID, int acitivityId);
+		public Task<IEnumerable<Attendence>> Get(int userId, int activityId);
 
 		/// <summary>
 		/// Get all attendences of a user
