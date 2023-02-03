@@ -7,6 +7,11 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _id = " id as Id ";
+		private readonly string _name = " name as Name ";
+		private readonly string _description = " description as Description ";
+		private readonly string _isRegular = " is_regular as IsRegular ";
+
 		public ActivityRepository(IContext context)
 		{
 			_context = context;

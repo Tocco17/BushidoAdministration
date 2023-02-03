@@ -7,6 +7,11 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _id = " id as Id ";
+		private readonly string _userId = " user_id as UserId ";
+		private readonly string _pay = " pay as Pay ";
+		private readonly string _perTimeInMinutes = " per_time_in_minutes as PerTimeInMinutes ";
+
 		public PaymentRepository(IContext context)
 		{
 			_context = context;

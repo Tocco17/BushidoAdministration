@@ -7,6 +7,11 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _id = " id as Id ";
+		private readonly string _attendenceId = " attendence_id as AttendenceId ";
+		private readonly string _motivation = " motivation as Motivation ";
+		private readonly string _isJustified = " is_justified as IsJustified ";
+
 		public ExtraAttendencyRepository(IContext context)
 		{
 			_context = context;

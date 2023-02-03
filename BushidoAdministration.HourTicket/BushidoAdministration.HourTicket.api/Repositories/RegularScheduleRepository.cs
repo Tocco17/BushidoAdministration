@@ -7,6 +7,12 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _id = " id as Id ";
+		private readonly string _activityId = " activity_id as ActivityId ";
+		private readonly string _weekDay = " week_day as WeekDay ";
+		private readonly string _startHour = " start_hour as StartHour ";
+		private readonly string _endHour = " end_hour as EndHour ";
+
 		public RegularScheduleRepository(IContext context)
 		{
 			_context = context;
