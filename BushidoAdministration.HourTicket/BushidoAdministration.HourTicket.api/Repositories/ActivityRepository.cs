@@ -21,8 +21,8 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 
 		public async Task<Activity> Create(Activity activity)
 		{
-			var query = $"insert into {_table} (id, name, description, is_regular) " +
-				$"values ({activity.Id}, {activity.Name}, {activity.Description}, {activity.IsRegular})";
+			var query = $"insert into {_table} (name, description, is_regular) " +
+				$"values ({activity.Name}, {activity.Description}, {activity.IsRegular})";
 			return await _context.CreateAsync<Activity>(query);
 		}
 
@@ -40,7 +40,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 
 		public async Task<bool> Update(Activity activity)
 		{
-			var query = $" update {_table} set is_regulare = {activity.IsRegular},";
+			var query = $" update {_table} set is_regular = {activity.IsRegular},";
 			if (activity.Name != string.Empty) query += $" name = '{activity.Name}',";
 			if (activity.Description != string.Empty) query += $" description = '{activity.Description}',";
 			query = query.Remove(query.Length - 1); //Per togliere la virgola
