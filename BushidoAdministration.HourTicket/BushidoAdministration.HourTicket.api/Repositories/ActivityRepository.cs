@@ -1,4 +1,5 @@
-﻿using BushidoAdministration.HourTicket.api.Contexts;
+﻿using System.Runtime.InteropServices;
+using BushidoAdministration.HourTicket.api.Contexts;
 using BushidoAdministration.HourTicket.api.Entities;
 
 namespace BushidoAdministration.HourTicket.api.Repositories
@@ -11,30 +12,41 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		private readonly string _name = " name as Name ";
 		private readonly string _description = " description as Description ";
 		private readonly string _isRegular = " is_regular as IsRegular ";
+		private readonly string _table = "dbo.activities";
 
 		public ActivityRepository(IContext context)
 		{
 			_context = context;
 		}
 
-		public Task<bool> Create(Activity activity)
+		public async Task<Activity> Create(Activity activity)
 		{
-			throw new NotImplementedException();
+			var query = $"insert into {_table} (id, name, description, is_regular) " +
+				$"values ({activity.Id}, {activity.Name}, {activity.Description}, {activity.IsRegular})";
+			return await _context.CreateAsync<Activity>(query);
 		}
 
-		public Task<bool> Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"delete from {_table} where id = {id}";
+			return await _context.DeleteAsync(query);
 		}
 
-		public Task<Activity> Get(int id)
+		public async Task<Activity> Get(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"select top(1) {_id}, {_name}, {_description}, {_isRegular} from {_table} where id = {id}";
+			return await _context.GetSingleAsync<Activity>(query);
 		}
 
-		public Task<bool> Update(Activity activity)
+		public async Task<bool> Update(Activity activity)
 		{
-			throw new NotImplementedException();
+			var query = $" update {_table} set is_regulare = {activity.IsRegular},";
+			if (activity.Name != string.Empty) query += $" name = '{activity.Name}',";
+			if (activity.Description != string.Empty) query += $" description = '{activity.Description}',";
+			query = query.Remove(query.Length - 1); //Per togliere la virgola
+			query += $" where id = {activity.Id}";
+
+			return await _context.UpdateAsync(query);
 		}
 	}
 }
