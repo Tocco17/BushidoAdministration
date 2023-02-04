@@ -50,8 +50,8 @@ builder.Services.AddSingleton<IContext, DbContext>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
-builder.Services.AddScoped<IAttendenceRepository, AttendenceRepository>();
-builder.Services.AddScoped<IExtraAttendencyRepository, ExtraAttendencyRepository>();
+builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+builder.Services.AddScoped<IExtraAttendanceRepository, ExtraAttendanceRepository>();
 builder.Services.AddScoped<IExtraScheduleRepository, ExtraScheduleRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IRegularScheduleRepository, RegularScheduleRepository>();

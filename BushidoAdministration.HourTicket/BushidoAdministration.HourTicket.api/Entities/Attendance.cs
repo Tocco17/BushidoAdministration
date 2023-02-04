@@ -1,6 +1,6 @@
 ﻿namespace BushidoAdministration.HourTicket.api.Entities
 {
-	public class Attendence
+	public class Attendance
 	{
 		public int Id { get; set; }
 		
