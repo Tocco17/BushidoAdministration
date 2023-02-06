@@ -11,13 +11,21 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 
 		private readonly string _table = "dbo.users";
 
-		private readonly string _id = " id as Id ";
-		private readonly string _email = " email as Email ";
-		private readonly string _username = " username as Username ";
-		private readonly string _password = " password as Password ";
-		private readonly string _firstName = " first_name as FirstName ";
-		private readonly string _lastName = " last_name as LastName ";
-		private readonly string _roleLevel = " role_level as RoleLevel ";
+		private static readonly string _id = " id ";
+		private static readonly string _email = " email ";
+		private static readonly string _username = " username ";
+		private static readonly string _password = " password ";
+		private static readonly string _firstName = " first_name ";
+		private static readonly string _lastName = " last_name ";
+		private static readonly string _roleLevel = " role_level ";
+
+		private static readonly string _idAs = $" {_id} as Id ";
+		private static readonly string _emailAs = $" {_email} as Email ";
+		private static readonly string _usernameAs = $" {_username} as Username ";
+		private static readonly string _passwordAs = $" {_password} as Password ";
+		private static readonly string _firstNameAs = $" {_firstName} as FirstName ";
+		private static readonly string _lastNameAs = $" {_lastName} as LastName ";
+		private static readonly string _roleLevelAs = $" {_roleLevel} as RoleLevel ";
 
 		public UserRepository(IContext context)
 		{
@@ -27,9 +35,9 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public async Task<User> LoginFromEmail(string email, string password)
 		{
 			var query = "select top(1) " +
-				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
+				$"{_idAs}, {_emailAs}, {_usernameAs}, {_passwordAs}, {_firstNameAs}, {_lastNameAs}, {_roleLevelAs} " +
 				$"from {_table} " +
-				$"where email = '{email}' and password = '{password}'";
+				$"where {_email} = '{email}' and {_password} = '{password}'";
 
 			var user = await _context.GetSingleAsync<User>(query);
 
@@ -39,9 +47,9 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public async Task<User> LoginFromUsername(string username, string password)
 		{
 			var query = "select top(1) " +
-				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
+				$"{_idAs}, {_emailAs}, {_usernameAs}, {_passwordAs}, {_firstNameAs}, {_lastNameAs}, {_roleLevelAs} " +
 				$"from {_table} " +
-				$"where username = '{username}' and password = '{password}'";
+				$"where {_username} = '{username}' and {_password} = '{password}'";
 
 			var user = await _context.GetSingleAsync<User>(query);
 
@@ -50,15 +58,15 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 
 		public async Task<RoleLevel?> GetRoleLevel(int userId)
 		{
-			var query = $"select top(1) {_roleLevel} from {_table} where id = {userId}";
+			var query = $"select top(1) {_roleLevelAs} from {_table} where {_id} = {userId}";
 			return await _context.GetSingleAsync<RoleLevel?>(query);
 		}
 
 		public async Task<User> GetFromId(int userId)
 		{
 			var query = $"select top(1) " +
-				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
-				$"from {_table} where id = {userId}";
+				$"{_idAs}, {_emailAs}, {_usernameAs}, {_passwordAs}, {_firstNameAs}, {_lastNameAs}, {_roleLevelAs} " +
+				$"from {_table} where {_id} = {userId}";
 			var user = await _context.GetSingleAsync<User>(query);
 			return user;
 		}
@@ -66,8 +74,8 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public async Task<User> GetFromEmail(string email)
 		{
 			var query = $"select top(1) " +
-				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
-				$"from {_table} where email = '{email}'";
+				$"{_idAs}, {_emailAs}, {_usernameAs}, {_passwordAs}, {_firstNameAs}, {_lastNameAs}, {_roleLevelAs} " +
+				$"from {_table} where {_email} = '{email}'";
 			var user = await _context.GetSingleAsync<User>(query);
 			return user;
 		}
@@ -75,8 +83,8 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public async Task<User> GetFromUsername(string username)
 		{
 			var query = $"select top(1) " +
-				$"{_id}, {_email}, {_username}, {_password}, {_firstName}, {_lastName}, {_roleLevel} " +
-				$"from {_table} where username = '{username}'";
+				$"{_idAs}, {_emailAs}, {_usernameAs}, {_passwordAs}, {_firstNameAs}, {_lastNameAs}, {_roleLevelAs} " +
+				$"from {_table} where {_username} = '{username}'";
 			var user = await _context.GetSingleAsync<User>(query);
 			return user;
 		}
@@ -84,19 +92,19 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public async Task<bool> Update(User userUpdated)
 		{
 			var query = $" update {_table} set";
-			if (userUpdated.Username != string.Empty) query += $" username = '{userUpdated.Username}',";
-			if (userUpdated.Email != string.Empty) query += $" email = '{userUpdated.Email}',";
-			if (userUpdated.FirstName != string.Empty) query += $" first_name = '{userUpdated.FirstName}',";
-			if (userUpdated.LastName != string.Empty) query += $" last_name = '{userUpdated.LastName}',";
+			if (userUpdated.Username != string.Empty) query += $" {_username} = '{userUpdated.Username}',";
+			if (userUpdated.Email != string.Empty) query += $" {_email} = '{userUpdated.Email}',";
+			if (userUpdated.FirstName != string.Empty) query += $" {_firstName} = '{userUpdated.FirstName}',";
+			if (userUpdated.LastName != string.Empty) query += $" {_lastName} = '{userUpdated.LastName}',";
 			query = query.Remove(query.Length - 1); //Per togliere la virgola
-			query += $" where id = {userUpdated.Id}";
+			query += $" where {_id} = {userUpdated.Id}";
 
 			return await _context.UpdateAsync(query);
 		}
 
 		public async Task<bool> UpdatePassword(int userId, string oldPassword, string newPassword)
 		{
-			var query = $"update {_table} set password = '{newPassword}' where id = {userId} and password = '{oldPassword}'";
+			var query = $"update {_table} set {_password} = '{newPassword}' where {_id} = {userId} and {_password} = '{oldPassword}'";
 			return await _context.UpdateAsync(query);
 		}
 

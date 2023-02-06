@@ -9,43 +9,48 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 
 		private readonly string _table = "dbo.payment";
 
-		private readonly string _id = " id as Id ";
-		private readonly string _userId = " user_id as UserId ";
-		private readonly string _pay = " pay as Pay ";
-		private readonly string _perTimeInMinutes = " per_time_in_minutes as PerTimeInMinutes ";
+		private static readonly string _id = " id ";
+		private static readonly string _userId = " user_id ";
+		private static readonly string _pay = " pay ";
+		private static readonly string _perTimeInMinutes = " per_time_in_minutes ";
+
+		private static readonly string _idAs = $" {_id} as Id ";
+		private static readonly string _userIdAs = $" {_userId} as UserId ";
+		private static readonly string _payAs = $" {_pay} as Pay ";
+		private static readonly string _perTimeInMinutesAs = $" {_perTimeInMinutes} as PerTimeInMinutes ";
 
 		public PaymentRepository(IContext context)
 		{
 			_context = context;
 		}
 
-		public async Task<bool> Create(Payment payment)
+		public async Task<Payment> Create(Payment payment)
 		{
-			var query = $"insert into {_table} (user_id, pay, per_time_in_minutes) " +
+			var query = $"insert into {_table} ({_userId}, {_pay}, {_perTimeInMinutes}) " +
 				$"values ({payment.UserId}, {payment.Pay}, {payment.PerTimeInMinutes}";
 			return await _context.CreateAsync<Payment>(query);
 		}
 
 		public async Task<bool> Delete(int id)
 		{
-			var query = $"delete from {_table} where id = {id}";
+			var query = $"delete from {_table} where {_id} = {id}";
 			return await _context.DeleteAsync(query);
 		}
 
 		public async Task<Payment> Get(int id)
 		{
-			var query = $"select top(1) {_id}, {_userId}, {_pay}, {_perTimeInMinutes} " +
+			var query = $"select top(1) {_idAs}, {_userIdAs}, {_payAs}, {_perTimeInMinutesAs} " +
 				$"from {_table} " +
-				$"where id = {id}";
+				$"where {_id} = {id}";
 
 			return await _context.GetSingleAsync<Payment>(query);
 		}
 
 		public async Task<IEnumerable<Payment>> GetFromUser(int userId)
 		{
-			var query = $"select {_id}, {_userId}, {_pay}, {_perTimeInMinutes} " +
+			var query = $"select {_idAs}, {_userIdAs}, {_payAs}, {_perTimeInMinutesAs} " +
 				$"from {_table} " +
-				$"where user_id = {userId}";
+				$"where {_userId} = {userId}";
 
 			return await _context.GetAsync<Payment>(query);
 		}
@@ -53,10 +58,10 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public async Task<bool> Update(Payment payment)
 		{
 			var query = $"update {_table} set " +
-				$"user_id = {payment.UserId}, " +
-				$"pay = {payment.Pay}, " +
-				$"per_time_in_minutes = {payment.PerTimeInMinutes} " +
-				$"where id = {payment.Id}";
+				$"{_userId} = {payment.UserId}, " +
+				$"{_pay} = {payment.Pay}, " +
+				$"{_perTimeInMinutes} = {payment.PerTimeInMinutes} " +
+				$"where {_id} = {payment.Id}";
 			return await _context.UpdateAsync(query);
 		}
 	}
