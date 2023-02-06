@@ -7,6 +7,8 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _table = "dbo.payment";
+
 		private readonly string _id = " id as Id ";
 		private readonly string _userId = " user_id as UserId ";
 		private readonly string _pay = " pay as Pay ";
@@ -17,29 +19,45 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			_context = context;
 		}
 
-		public Task<bool> Create(Payment payment)
+		public async Task<bool> Create(Payment payment)
 		{
-			throw new NotImplementedException();
+			var query = $"insert into {_table} (user_id, pay, per_time_in_minutes) " +
+				$"values ({payment.UserId}, {payment.Pay}, {payment.PerTimeInMinutes}";
+			return await _context.CreateAsync<Payment>(query);
 		}
 
-		public Task Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"delete from {_table} where id = {id}";
+			return await _context.DeleteAsync(query);
 		}
 
-		public Task<Payment> Get(int id)
+		public async Task<Payment> Get(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"select top(1) {_id}, {_userId}, {_pay}, {_perTimeInMinutes} " +
+				$"from {_table} " +
+				$"where id = {id}";
+
+			return await _context.GetSingleAsync<Payment>(query);
 		}
 
-		public Task<IEnumerable<Payment>> GetFromUser(int userId)
+		public async Task<IEnumerable<Payment>> GetFromUser(int userId)
 		{
-			throw new NotImplementedException();
+			var query = $"select {_id}, {_userId}, {_pay}, {_perTimeInMinutes} " +
+				$"from {_table} " +
+				$"where user_id = {userId}";
+
+			return await _context.GetAsync<Payment>(query);
 		}
 
-		public Task<bool> Update(Payment payment)
+		public async Task<bool> Update(Payment payment)
 		{
-			throw new NotImplementedException();
+			var query = $"update {_table} set " +
+				$"user_id = {payment.UserId}, " +
+				$"pay = {payment.Pay}, " +
+				$"per_time_in_minutes = {payment.PerTimeInMinutes} " +
+				$"where id = {payment.Id}";
+			return await _context.UpdateAsync(query);
 		}
 	}
 }

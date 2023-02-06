@@ -4,7 +4,7 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 {
 	public interface IExtraScheduleRepository
 	{
-		public Task<bool> Create(ExtraSchedule extraSchedule);
+		public Task<ExtraSchedule> Create(ExtraSchedule extraSchedule);
 		public Task<ExtraSchedule> Get(int id);
 		public Task<IEnumerable<ExtraSchedule>> GetFromActivity(int activityId);
 		public Task<bool> Update(ExtraSchedule extraSchedule);

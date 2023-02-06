@@ -7,6 +7,8 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 	{
 		private readonly IContext _context;
 
+		private readonly string _table = "dbo.regular_schedule";
+
 		private readonly string _id = " id as Id ";
 		private readonly string _activityId = " activity_id as ActivityId ";
 		private readonly string _weekDay = " week_day as WeekDay ";
@@ -18,29 +20,47 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 			_context = context;
 		}
 
-		public Task<bool> Create(RegularSchedule regularSchedule)
+		public async Task<RegularSchedule> Create(RegularSchedule regularSchedule)
 		{
-			throw new NotImplementedException();
+			var query = $"insert into {_table} (activity_id, week_day, start_hour, end_hour) " +
+				$"values ({regularSchedule.ActivityId}, {regularSchedule.WeekDay}, {regularSchedule.StartHour}, {regularSchedule.EndHour}";
+			return await _context.CreateAsync<RegularSchedule>(query);
 		}
 
-		public Task<bool> Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"delete from {_table} where id = {id}";
+			return await _context.DeleteAsync(query);
 		}
 
-		public Task<RegularSchedule> Get(int id)
+		public async Task<RegularSchedule> Get(int id)
 		{
-			throw new NotImplementedException();
+			var query = $"select top(1) {_id}, {_activityId}, {_weekDay}, {_startHour}, {_endHour} " +
+				$"from {_table} " +
+				$"where id = {id}";
+
+			return await _context.GetSingleAsync<RegularSchedule>(query);
 		}
 
-		public Task<IEnumerable<RegularSchedule>> GetFromActivity(int activityId)
+		public async Task<IEnumerable<RegularSchedule>> GetFromActivity(int activityId)
 		{
-			throw new NotImplementedException();
+			var query = $"select {_id}, {_activityId}, {_weekDay}, {_startHour}, {_endHour} " +
+				$"from {_table} " +
+				$"where activity_id = {activityId}";
+
+			return await _context.GetAsync<RegularSchedule>(query);
 		}
 
-		public Task<bool> Update(RegularSchedule regularSchedule)
+		public async Task<bool> Update(RegularSchedule regularSchedule)
 		{
-			throw new NotImplementedException();
+			var query = $"update {_table} set " +
+				$"activity_id = {regularSchedule.ActivityId}, " +
+				$"week_day = {regularSchedule.WeekDay}, " +
+				$"start_hour = {regularSchedule.StartHour}, " +
+				$"end_hour = {regularSchedule.EndHour} " +
+				$"where id = {regularSchedule.Id}";
+
+			return await _context.UpdateAsync(query);
 		}
 	}
 }

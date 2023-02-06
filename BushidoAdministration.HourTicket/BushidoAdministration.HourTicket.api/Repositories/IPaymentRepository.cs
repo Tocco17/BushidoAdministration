@@ -8,6 +8,6 @@ namespace BushidoAdministration.HourTicket.api.Repositories
 		public Task<Payment> Get(int id);
 		public Task<IEnumerable<Payment>> GetFromUser(int userId);
 		public Task<bool> Update(Payment payment);
-		public Task Delete(int id);
+		public Task<bool> Delete(int id);
 	}
 }
