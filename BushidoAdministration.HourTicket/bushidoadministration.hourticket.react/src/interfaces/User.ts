@@ -1,10 +1,10 @@
+import Roles from "../enums/roles.enum";
 import Base from "./Base";
-import Role from "./Role";
 
 interface User extends Base {
     email: string
     password: string
-    roles: Role[]
+    roles: Roles[]
 }
 
 export default User
