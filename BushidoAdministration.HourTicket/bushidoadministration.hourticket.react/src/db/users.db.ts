@@ -1,4 +1,4 @@
-import Roles from "../enums/roles.enum";
+import Role from "../enums/role.enum";
 import User from "../interfaces/User";
 
 const UsersDb : User[] = [
@@ -7,7 +7,7 @@ const UsersDb : User[] = [
         email: 'president@admin.com',
         password: 'admin',
         roles: [
-            Roles.admin
+            Role.admin
         ]
     }
 ]
