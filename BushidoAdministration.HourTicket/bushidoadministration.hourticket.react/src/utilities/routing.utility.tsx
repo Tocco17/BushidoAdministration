@@ -4,7 +4,6 @@ import Unauthorized from "../pages/auth/unauthorized"
 import Details from "../pages/details"
 import Home from "../pages/home"
 import Login from "../pages/login"
-import Prova from "../pages/prova"
 
 export interface RouteInterface {
     name: string
