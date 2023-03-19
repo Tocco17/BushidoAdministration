@@ -1,5 +1,7 @@
 import { ReactNode } from "react"
 import Role from "../enums/role.enum"
+import Unauthorized from "../pages/auth/unauthorized"
+import Details from "../pages/details"
 import Home from "../pages/home"
 import Login from "../pages/login"
 
@@ -29,11 +31,30 @@ const login : RouteInterface = {
     element: <Login/>
 }
 
+const unauthorized : RouteInterface = {
+    name: 'Unauthorized',
+    path: '/unauthorized',
+    element: <Unauthorized />
+}
+
+const details : RouteInterface = {
+    name: 'Details',
+    path: '/details',
+    element: <Details />
+}
+
+export const allRoutes = {
+    home,
+    login,
+    details,
+    unauthorized
+}
+
 export const publicRoutes : RouteListInterface = {
     routes: [home, login]
 }
 
-// export const privateRoutes : PrivateRouteListInterface = {
-//     routes: [home],
-//     allowedRoles: [Role.admin, Role.coach]
-// }
+export const privateNoRoleRoutes : PrivateRouteListInterface = {
+    routes: [details],
+    allowedRoles: []
+}
