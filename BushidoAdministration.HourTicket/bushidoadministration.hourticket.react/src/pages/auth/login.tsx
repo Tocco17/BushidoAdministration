@@ -3,7 +3,7 @@ import { Button, TextField } from '@mui/material'
 import loginApi from '../../api/auth.api.ts/login.api';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { allRoutes } from '../../utilities/routing.utility';
+import { allPath } from '../../utilities/routing.utility';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -53,8 +53,8 @@ const Login = () => {
             </Button>
         </form>
         <div>
-            <Link to={allRoutes.details.path}>Details</Link>
-            <Link to={allRoutes.home.path}>Home</Link>
+            <Link to={allPath.details}>Details</Link>
+            <Link to={allPath.home}>Home</Link>
         </div>
         </>
     );

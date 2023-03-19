@@ -3,7 +3,7 @@ import Role from "../enums/role.enum"
 import Unauthorized from "../pages/auth/unauthorized"
 import Details from "../pages/details"
 import Home from "../pages/home"
-import Login from "../pages/login"
+import Login from "../pages/auth/login"
 
 export interface RouteInterface {
     name: string
@@ -43,11 +43,11 @@ const details : RouteInterface = {
     element: <Details />
 }
 
-export const allRoutes = {
-    home,
-    login,
-    details,
-    unauthorized,
+export const allPath = {
+    home: home.path,
+    login: login.path,
+    details: details.path,
+    unauthorized: unauthorized.path,
 }
 
 export const publicRoutes : RouteListInterface = {
