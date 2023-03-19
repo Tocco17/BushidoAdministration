@@ -4,6 +4,7 @@ import Unauthorized from "../pages/auth/unauthorized"
 import Details from "../pages/details"
 import Home from "../pages/home"
 import Login from "../pages/auth/login"
+import Logout from "../pages/auth/logout"
 
 export interface RouteInterface {
     name: string
@@ -37,6 +38,12 @@ const unauthorized : RouteInterface = {
     element: <Unauthorized />
 }
 
+const logout : RouteInterface = {
+    name: 'Logout',
+    path: '/logout',
+    element: <Logout/>
+}
+
 const details : RouteInterface = {
     name: 'Details',
     path: '/details',
@@ -48,10 +55,11 @@ export const allPath = {
     login: login.path,
     details: details.path,
     unauthorized: unauthorized.path,
+    logout: logout.path,
 }
 
 export const publicRoutes : RouteListInterface = {
-    routes: [home, login, unauthorized]
+    routes: [home, login, unauthorized, logout]
 }
 
 export const privateNoRoleRoutes : PrivateRouteListInterface = {
