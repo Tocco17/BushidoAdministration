@@ -15,7 +15,7 @@ const RequireAuth = ({allowedRoles}: RequireAuthProps) => {
         return <Navigate to={allRoutes.login.path} state={{from: location}} replace/>
 
     const roles = auth?.user.roles
-    if(roles.length != 0 && !roles.find(role => allowedRoles.includes(role)))
+    if(allowedRoles.length != 0 && !roles.find(role => allowedRoles.includes(role)))
         return <Navigate to={allRoutes.unauthorized.path} state={{from: location}} replace />
     
     return <Outlet/>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from '../contextes/auth.context';
 import { privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes, RouteInterface } from '../utilities/routing.utility';
 import RequireAuth from './auth/require-auth';
 
@@ -15,15 +16,17 @@ const RouteComponent = () => {
 
     return (
         <>
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' >
-                    { mapRoutes(publicRoutes.routes) }
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' >
+                        { mapRoutes(publicRoutes.routes) }
 
-                    { mapPrivateRoutes(privateNoRoleRoutes) }
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                        { mapPrivateRoutes(privateNoRoleRoutes) }
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
         </>
     )
 }
