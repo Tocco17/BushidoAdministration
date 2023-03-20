@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '../contextes/auth.context';
 import { privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes, RouteInterface } from '../utilities/routing.utility';
+import PersistLogin from './auth/persist-login';
 import RequireAuth from './auth/require-auth';
 
 
@@ -14,6 +15,14 @@ const RouteComponent = () => {
         </Route>
     )
 
+    const mapPersistRoutes = (routeLists: PrivateRouteListInterface[]) => (
+        <Route element={<PersistLogin/>}>
+            {
+                routeLists.map(r => mapPrivateRoutes(r))
+            }
+        </Route>
+    )
+
     return (
         <>
         <AuthProvider>
@@ -22,7 +31,7 @@ const RouteComponent = () => {
                     <Route path='/' >
                         { mapRoutes(publicRoutes.routes) }
 
-                        { mapPrivateRoutes(privateNoRoleRoutes) }
+                        { mapPersistRoutes([privateNoRoleRoutes]) }
                     </Route>
                 </Routes>
             </BrowserRouter>
