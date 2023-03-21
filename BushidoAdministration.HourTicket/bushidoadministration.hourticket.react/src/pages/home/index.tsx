@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom"
-import { allPath } from "../../utilities/routing.utility"
+import { allPath } from "../../utilities/routes.utility"
 
 const Home = () => {    
     return (
         <>
         <div>HOME</div>
-        <Link to={allPath.details}>Details</Link>
-        <Link to={allPath.login}>Login</Link>
         </>
     )
 }

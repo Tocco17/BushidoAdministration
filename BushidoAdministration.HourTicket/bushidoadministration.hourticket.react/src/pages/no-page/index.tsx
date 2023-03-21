@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
-import { allPath } from "../../utilities/routing.utility"
+import { allPath } from "../../utilities/routes.utility"
 
 const NoPage = () => {
     return (
         <>
         <div>No Page</div>
-        <Link to={allPath.home}>Home</Link>
         </>
     )
 }
