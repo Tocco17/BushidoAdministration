@@ -1,17 +1,10 @@
 import { ReactNode } from "react"
+import DefaultLayout from "../components/layouts/default-layout"
+import EmptyLayout from "../components/layouts/empty-layout"
 import Role from "../enums/role.enum"
-import Unauthorized from "../pages/auth/unauthorized"
-import Details from "../pages/details"
-import Home from "../pages/home"
-import Login from "../pages/auth/login"
-import Logout from "../pages/auth/logout"
-import NoPage from "../pages/no-page"
+import { allRoutes, RouteInterface } from "./routes.utility"
 
-export interface RouteInterface {
-    name: string
-    path: string
-    element: ReactNode
-}
+const {home, login, unauthorized, logout, notFound, details} = allRoutes
 
 export interface RouteListInterface {
     routes: RouteInterface[]
@@ -21,58 +14,11 @@ export interface PrivateRouteListInterface extends RouteListInterface {
     allowedRoles: Role[]
 }
 
-const home : RouteInterface = {
-    name: 'Home',
-    path: '/',
-    element: <Home/>
-}
-
-const login : RouteInterface = {
-    name: 'Login',
-    path: '/login',
-    element: <Login/>
-}
-
-const unauthorized : RouteInterface = {
-    name: 'Unauthorized',
-    path: '/unauthorized',
-    element: <Unauthorized />
-}
-
-const logout : RouteInterface = {
-    name: 'Logout',
-    path: '/logout',
-    element: <Logout/>
-}
-
-const details : RouteInterface = {
-    name: 'Details',
-    path: '/details',
-    element: <Details />
-}
-
-const notFound : RouteInterface = {
-    name: 'NotFound',
-    path: '*',
-    element: <NoPage />
-}
-
-export const allRoutes = {
-    home,
-    login,
-    details,
-    unauthorized,
-    logout,
-    notFound,
-}
-
-export const allPath = {
-    home: home.path,
-    login: login.path,
-    details: details.path,
-    unauthorized: unauthorized.path,
-    logout: logout.path,
-    notFound: notFound.path,
+export interface CompleteRouteListInterface {
+    path: string
+    element: ReactNode
+    publicRoutes: RouteListInterface
+    privateRoutes: PrivateRouteListInterface[]
 }
 
 export const publicRoutes : RouteListInterface = {
@@ -83,3 +29,26 @@ export const privateNoRoleRoutes : PrivateRouteListInterface = {
     routes: [details],
     allowedRoles: []
 }
+
+const defaultLayoutRoutes : CompleteRouteListInterface = {
+    path: '/',
+    element: <DefaultLayout />,
+    publicRoutes: {routes: [home]},
+    privateRoutes: [
+        {routes: [details], allowedRoles: []}
+    ]
+}
+
+const emptyLayoutRoutes : CompleteRouteListInterface = {
+    path: '/',
+    element: <EmptyLayout />,
+    publicRoutes: {routes: [login, unauthorized, logout, notFound]},
+    privateRoutes: []
+}
+
+const everyCompleteRoutes : CompleteRouteListInterface[] = [
+    defaultLayoutRoutes, emptyLayoutRoutes
+]
+
+export default everyCompleteRoutes
+

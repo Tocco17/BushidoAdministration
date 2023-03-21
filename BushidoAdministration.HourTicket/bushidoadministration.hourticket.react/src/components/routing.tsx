@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '../contextes/auth.context';
-import { privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes, RouteInterface } from '../utilities/routing.utility';
+import { RouteInterface } from '../utilities/routes.utility';
+import everyCompleteRoutes, { CompleteRouteListInterface, privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes } from '../utilities/routing.utility';
 import RequireAuth from './auth/require-auth';
 
 
@@ -14,18 +15,20 @@ const RouteComponent = () => {
         </Route>
     )
 
-    //prova
+    const mapCompleteRoutes = (completeRoute: CompleteRouteListInterface) => (
+        <Route path={completeRoute.path} element={completeRoute.element}>
+            { mapRoutes(completeRoute.publicRoutes.routes) }
+
+            { completeRoute.privateRoutes.map(mapPrivateRoutes)}
+        </Route>
+    )
 
     return (
         <>
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' >
-                        { mapRoutes(publicRoutes.routes) }
-
-                        { mapPrivateRoutes(privateNoRoleRoutes) }
-                    </Route>
+                    { everyCompleteRoutes.map(mapCompleteRoutes) }
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
