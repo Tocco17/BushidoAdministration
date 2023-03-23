@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 import { allPath } from "../../utilities/routes/routes.utility"
 
-const Home = () => {    
+const NoPage = () => {
     return (
         <>
-        <div>HOME</div>
+        <div>No Page</div>
         </>
     )
 }
 
-export default Home
+export default NoPage

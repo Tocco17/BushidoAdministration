@@ -1,5 +1,5 @@
 enum Role {
-    admin,
+    admin = 1,
     coach
 }
 

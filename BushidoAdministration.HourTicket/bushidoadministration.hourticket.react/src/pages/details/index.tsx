@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 import { allPath } from "../../utilities/routes/routes.utility"
 
-const Home = () => {    
+const Details = () => {
     return (
         <>
-        <div>HOME</div>
+        <div>DETAILS</div>
         </>
     )
 }
 
-export default Home
+export default Details
