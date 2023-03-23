@@ -1,11 +1,11 @@
 import { ReactNode } from "react"
 
-import Unauthorized from "../pages/auth/unauthorized"
-import Details from "../pages/details"
-import Home from "../pages/home"
-import Login from "../pages/auth/login"
-import Logout from "../pages/auth/logout"
-import NoPage from "../pages/no-page"
+import Unauthorized from "../../pages/auth/unauthorized"
+import Details from "../../pages/details"
+import Home from "../../pages/home"
+import Login from "../../pages/auth/login"
+import Logout from "../../pages/auth/logout"
+import NoPage from "../../pages/no-page"
 
 export interface RouteInterface {
     name: string

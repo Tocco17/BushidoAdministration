@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom"
-import { allPath } from "../../utilities/routes.utility"
+import { allPath } from "../../utilities/routes/routes.utility"
 import GoBackButton from "../buttons/go-back-button"
 
 const EmptyLayout = () => {

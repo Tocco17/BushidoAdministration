@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 import Role from "../../enums/role.enum"
 import useAuth from "../../hooks/useAuth"
-import { allPath } from "../../utilities/routes.utility"
+import { allPath } from "../../utilities/routes/routes.utility"
 
 type RequireAuthProps = {
     allowedRoles: Role[]

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '../contextes/auth.context';
-import { RouteInterface } from '../utilities/routes.utility';
-import everyCompleteRoutes, { CompleteRouteListInterface, privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes } from '../utilities/routing.utility';
+import { RouteInterface } from '../utilities/routes/routes.utility';
+import everyCompleteRoutes, { CompleteRouteListInterface, privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes } from '../utilities/routes/routing.utility';
 import RequireAuth from './auth/require-auth';
 
 

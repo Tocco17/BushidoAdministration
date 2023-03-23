@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
-import DefaultLayout from "../components/layouts/default-layout"
-import EmptyLayout from "../components/layouts/empty-layout"
-import Role from "../enums/role.enum"
+import DefaultLayout from "../../components/layouts/default-layout"
+import EmptyLayout from "../../components/layouts/empty-layout"
+import Role from "../../enums/role.enum"
 import { allRoutes, RouteInterface } from "./routes.utility"
 
 const {home, login, unauthorized, logout, notFound, details} = allRoutes
