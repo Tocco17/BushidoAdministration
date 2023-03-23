@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
-import { allPath } from "../../utilities/routing.utility"
+import { allPath } from "../../utilities/routes/routes.utility"
 
 const Logout = () => {
     const {setAuth} = useAuth()
@@ -11,8 +11,6 @@ const Logout = () => {
     return (
         <>
         <div>LOGOUT</div>
-        <Link to={allPath.home}>Home</Link>
-        <Link to={allPath.details}>Details</Link>
         </>
     )
 

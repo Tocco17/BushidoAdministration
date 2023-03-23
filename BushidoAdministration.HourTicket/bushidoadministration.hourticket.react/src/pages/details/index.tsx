@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
-import { allPath } from "../../utilities/routing.utility"
+import { allPath } from "../../utilities/routes/routes.utility"
 
 const Details = () => {
     return (
         <>
         <div>DETAILS</div>
-        <Link to={allPath.logout}>Logout</Link>
         </>
     )
 }

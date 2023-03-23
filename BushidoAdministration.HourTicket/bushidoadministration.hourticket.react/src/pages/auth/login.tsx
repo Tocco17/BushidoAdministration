@@ -3,7 +3,7 @@ import { Button, TextField } from '@mui/material'
 import loginApi from '../../api/auth.api.ts/login.api';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { allPath } from '../../utilities/routing.utility';
+import { allPath } from '../../utilities/routes/routes.utility';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -26,20 +26,13 @@ const Login = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        console.log(username)
-        console.log(password)
-
         const user = loginApi(username, password)
-        console.log(user)
 
         if(!user) return console.error('Not logged')
         
-        console.log(auth)
         setAuth({...auth, user: user})
-        console.log(auth)
         
         navigate(from, {replace: true})
-        // Effettua il login con username e password
     }
 
     return (
@@ -52,10 +45,6 @@ const Login = () => {
                 Login
             </Button>
         </form>
-        <div>
-            <Link to={allPath.details}>Details</Link>
-            <Link to={allPath.home}>Home</Link>
-        </div>
         </>
     );
 };

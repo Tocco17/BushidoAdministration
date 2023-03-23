@@ -1,24 +1,16 @@
 import { ReactNode } from "react"
-import Role from "../enums/role.enum"
-import Unauthorized from "../pages/auth/unauthorized"
-import Details from "../pages/details"
-import Home from "../pages/home"
-import Login from "../pages/auth/login"
-import Logout from "../pages/auth/logout"
-import NoPage from "../pages/no-page"
+
+import Unauthorized from "../../pages/auth/unauthorized"
+import Details from "../../pages/details"
+import Home from "../../pages/home"
+import Login from "../../pages/auth/login"
+import Logout from "../../pages/auth/logout"
+import NoPage from "../../pages/no-page"
 
 export interface RouteInterface {
     name: string
     path: string
     element: ReactNode
-}
-
-export interface RouteListInterface {
-    routes: RouteInterface[]
-}
-
-export interface PrivateRouteListInterface extends RouteListInterface {
-    allowedRoles: Role[]
 }
 
 const home : RouteInterface = {
@@ -73,13 +65,4 @@ export const allPath = {
     unauthorized: unauthorized.path,
     logout: logout.path,
     notFound: notFound.path,
-}
-
-export const publicRoutes : RouteListInterface = {
-    routes: [home, login, unauthorized, logout, notFound]
-}
-
-export const privateNoRoleRoutes : PrivateRouteListInterface = {
-    routes: [details],
-    allowedRoles: []
 }

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '../contextes/auth.context';
-import { privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes, RouteInterface } from '../utilities/routing.utility';
-import PersistLogin from './auth/persist-login';
+import { RouteInterface } from '../utilities/routes/routes.utility';
+import everyCompleteRoutes, { CompleteRouteListInterface, privateNoRoleRoutes, PrivateRouteListInterface, publicRoutes } from '../utilities/routes/routing.utility';
 import RequireAuth from './auth/require-auth';
 
 
@@ -15,11 +15,11 @@ const RouteComponent = () => {
         </Route>
     )
 
-    const mapPersistRoutes = (routeLists: PrivateRouteListInterface[]) => (
-        <Route element={<PersistLogin/>}>
-            {
-                routeLists.map(r => mapPrivateRoutes(r))
-            }
+    const mapCompleteRoutes = (completeRoute: CompleteRouteListInterface) => (
+        <Route path={completeRoute.path} element={completeRoute.element}>
+            { mapRoutes(completeRoute.publicRoutes.routes) }
+
+            { completeRoute.privateRoutes.map(mapPrivateRoutes)}
         </Route>
     )
 
@@ -28,11 +28,7 @@ const RouteComponent = () => {
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' >
-                        { mapRoutes(publicRoutes.routes) }
-
-                        { mapPersistRoutes([privateNoRoleRoutes]) }
-                    </Route>
+                    { everyCompleteRoutes.map(mapCompleteRoutes) }
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
