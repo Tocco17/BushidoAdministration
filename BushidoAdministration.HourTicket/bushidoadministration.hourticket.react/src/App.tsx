@@ -2,19 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Routing from './components/routing';
-import { ThemeProvider } from '@emotion/react';
-import theme from './themes';
-import { useSelector } from 'react-redux';
+import { ThemeProvider } from '@mui/system';
+import CustomThemeProvider from './contextes/theme.context';
 
 function App() {
-  const customization = useSelector((state) => state.customization)
-
   return (
     <>
-    <ThemeProvider theme={theme(customization)}>
-
+    <CustomThemeProvider>
       <Routing />
-    </ThemeProvider>
+    </CustomThemeProvider>
     </>
   );
 }
