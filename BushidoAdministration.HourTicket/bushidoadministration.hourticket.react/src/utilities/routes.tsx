@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import Role from "../enums/role.enum"
 import Home from "../pages/home"
-import Login from "../pages/login"
+import Login from "../pages/auth/login"
 
 export interface RouteInterface {
     name: string
