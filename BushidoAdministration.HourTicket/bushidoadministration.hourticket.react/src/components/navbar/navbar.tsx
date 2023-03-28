@@ -1,23 +1,13 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { allRoutes, RouteInterface } from '../../utilities/routes/routes.utility';
+import { RouteInterface } from '../../utilities/routes/routes.utility';
 import { useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
-import { useEffect, useState } from 'react';
 import getCssClass, { container } from '../../utilities/theme/theme-classes';
 import { navbar } from './navbar.theme';
+
+import logo from '../../assets/images/cropped-logo-bushido-1.png'
 
 type NavbarComponentProps = {
     routes: RouteInterface[]
@@ -36,9 +26,11 @@ function NavbarComponent({routes, settings} : NavbarComponentProps) {
     return (
         <>
         <Box sx={getCssClass([container, navbar])}>
-
+            {/* <AppBar sx={{backgroundImage: 'url(../../assets/images/cropped-logo-bushido-1.png)', backgroundSize: 'cover'}}> */}
+            <AppBar>
+                <Box component="img" src={`url(${logo})`}></Box>
+            </AppBar>
         </Box>
-        <AppBar></AppBar>
         </>
     )
 }
