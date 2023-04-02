@@ -24,3 +24,7 @@ export const fontSize = (size: number, dimension = 'px') => (
         fontSize: `${size}${dimension}`
     } as CssClass
 )
+
+export const verticalAlign: CssClass = {
+    verticalAlign: 'center'
+}

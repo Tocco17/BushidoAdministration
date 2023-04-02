@@ -7,12 +7,15 @@ import { CssClass } from "../../utilities/theme/theme-classes"
 
 const DefaultLayout = () => {
     const mainContainer: CssClass = {
-        mx: 1, 
+        // mx: 1, 
+        marginTop: 1,
+        minHeight: '100vh',
         minWidth: '100vh', 
         maxWidth: '100vh', 
         width: '100%', 
         display: 'flex', 
         flexDirection: 'column',
+        alignItems: 'center',
         gap: 1
     }
 

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { RouteInterface } from '../../utilities/routes/routes.utility';
 import { useNavigate } from 'react-router';
 // import useAuth from '../../hooks/useAuth';
-import getCssClass, { fontSize } from '../../utilities/theme/theme-classes';
+import getCssClass, { fontSize, verticalAlign } from '../../utilities/theme/theme-classes';
 import { navbar, white } from './navbar.theme';
 
 // import logo from '../../assets/images/cropped-logo-bushido-1.png'
@@ -32,10 +32,10 @@ function NavbarComponent({routes, settings} : NavbarComponentProps) {
         <>
         <AppBar position='static' sx={getCssClass([navbar])}>
             <Container maxWidth='xl'>
-                <Box>
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', gap: 1}}>
                     {
                         routes.map(r => (
-                            <Button key={r.name} onClick={(e) => handleMenuClick(e, r)} sx={getCssClass([white, fontSize(20)])}>{r.name}</Button>
+                            <Button key={r.name} onClick={(e) => handleMenuClick(e, r)} sx={getCssClass([white, verticalAlign, fontSize(20), {marginTop: 0.5}])}>{r.name}</Button>
                         ))
                     }
                 </Box>
