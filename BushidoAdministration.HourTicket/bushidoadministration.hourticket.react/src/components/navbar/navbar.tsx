@@ -8,6 +8,8 @@ import getCssClass, { container } from '../../utilities/theme/theme-classes';
 import { navbar } from './navbar.theme';
 
 import logo from '../../assets/images/cropped-logo-bushido-1.png'
+// \src\assets\images\cropped-logo-bushido-1.png
+// \src\components\navbar\navbar.tsx
 
 type NavbarComponentProps = {
     routes: RouteInterface[]
@@ -15,6 +17,10 @@ type NavbarComponentProps = {
 }
 
 function NavbarComponent({routes, settings} : NavbarComponentProps) {
+    const timestamp = new Date().getTime(); // ottieni un timestamp univoco
+    const imagePath = `${logo}?t=${timestamp}`; // aggiungi il timestamp alla fine del percorso dell'immagine
+
+
     const auth = useAuth()
     const navigate = useNavigate()
 
@@ -28,7 +34,7 @@ function NavbarComponent({routes, settings} : NavbarComponentProps) {
         <Box sx={getCssClass([container, navbar])}>
             {/* <AppBar sx={{backgroundImage: 'url(../../assets/images/cropped-logo-bushido-1.png)', backgroundSize: 'cover'}}> */}
             <AppBar>
-                <Box component="img" src={`url(${logo})`}></Box>
+                <Box component="img" src={`url(${imagePath})`}></Box>
             </AppBar>
         </Box>
         </>
