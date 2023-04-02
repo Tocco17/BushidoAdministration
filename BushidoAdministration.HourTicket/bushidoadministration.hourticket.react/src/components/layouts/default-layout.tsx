@@ -2,15 +2,33 @@ import { Link, Outlet } from "react-router-dom"
 import { allPath, allRoutes } from "../../utilities/routes/routes.utility"
 import GoBackButton from "../buttons/go-back-button"
 import NavbarComponent from "../navbar/navbar"
+import { Container } from "@mui/material"
+import { CssClass } from "../../utilities/theme/theme-classes"
 
 const DefaultLayout = () => {
+    const mainContainer: CssClass = {
+        mx: 1, 
+        minWidth: '100vh', 
+        maxWidth: '100vh', 
+        width: '100%', 
+        display: 'flex', 
+        flexDirection: 'column',
+        gap: 1
+    }
+
     return (
         <>
-        <NavbarComponent routes={[allRoutes.home, allRoutes.details]} settings={[allRoutes.login, allRoutes.logout]} />
+        <Container sx={mainContainer}>
 
-        <GoBackButton label="Torna indietro"/>
+            <NavbarComponent routes={[allRoutes.home, allRoutes.details]} settings={[allRoutes.login, allRoutes.logout]} />
 
-        <Outlet />
+            <GoBackButton label="Torna indietro"/>
+
+            <Container sx={{flexGrow: 1}}>
+                <Outlet />
+
+            </Container>
+        </Container>        
         </>
     )
 }
