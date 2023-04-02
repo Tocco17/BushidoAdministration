@@ -1,5 +1,5 @@
 import { createContext, ReactElement, useState } from "react";
-import AuthInterface from "../interfaces/auth.interface";
+import AuthInterface from "../models/interfaces/auth.interface";
 
 type AuthContextType = {
     auth: AuthInterface | undefined

@@ -1,4 +1,4 @@
-import Role from "../../enums/role.enum";
+import Role from "../enums/role.enum";
 import Base from "./Base";
 
 interface User extends Base {

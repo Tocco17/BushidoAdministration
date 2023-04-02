@@ -1,5 +1,5 @@
 import Role from "../enums/role.enum"
-import User from "./models/User"
+import User from "../entities/User"
 
 interface AuthInterface {
     user: User | undefined

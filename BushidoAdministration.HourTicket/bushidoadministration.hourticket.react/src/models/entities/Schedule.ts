@@ -1,4 +1,4 @@
-import Week from "../../enums/week.enum";
+import Week from "../enums/week.enum";
 import Base from "./Base";
 
 interface Schedule extends Base {

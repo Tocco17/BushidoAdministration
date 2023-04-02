@@ -1,5 +1,5 @@
 import { Components } from "@mui/material/styles"
-import ThemeInterface from "../interfaces/themes/theme.interface"
+import ThemeInterface from "../models/themes/theme.interface"
 
 const componentStyleOverrides : (theme: ThemeInterface) => Components = (theme) => {
     const bgColor = theme.colors?.grey50

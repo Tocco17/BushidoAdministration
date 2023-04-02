@@ -1,5 +1,5 @@
 import { PaletteOptions } from "@mui/material/styles"
-import ThemeInterface from "../interfaces/themes/theme.interface"
+import ThemeInterface from "../models/themes/theme.interface"
 
 const themePalette : (theme : ThemeInterface) =>  PaletteOptions = (theme) => (
     {

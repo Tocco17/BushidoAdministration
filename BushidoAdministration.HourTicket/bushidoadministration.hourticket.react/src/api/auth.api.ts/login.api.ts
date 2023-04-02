@@ -1,6 +1,6 @@
-import UsersDb from "../../db/users.db"
+import UsersDb from "../db/users.db"
 import useAuth from "../../hooks/useAuth"
-import User from "../../interfaces/models/User"
+import User from "../../models/entities/User"
 
 const loginApi = (email: string, password: string) => {
     const user = UsersDb.find(u => u.email === email && u.password === password)

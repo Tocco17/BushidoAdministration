@@ -1,5 +1,5 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography"
-import ThemeInterface from "../interfaces/themes/theme.interface"
+import ThemeInterface from "../models/themes/theme.interface"
 
 const themeTypography : (theme : ThemeInterface) =>  TypographyOptions = (theme) => (
     {

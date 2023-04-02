@@ -1,7 +1,7 @@
 // assets
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 import colors from 'assets/scss/_themes-vars.module.scss';
-import ThemeInterface from '../interfaces/themes/theme.interface';
+import ThemeInterface from '../models/themes/theme.interface';
 import componentStyleOverrides from './component-style-override';
 import themePalette from './palette';
 import themeTypography from './typography';

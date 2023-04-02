@@ -1,5 +1,5 @@
-import Role from "../enums/role.enum";
-import User from "../interfaces/models/User";
+import Role from "../../models/enums/role.enum";
+import User from "../../models/entities/User";
 
 const UsersDb : User[] = [
     {
