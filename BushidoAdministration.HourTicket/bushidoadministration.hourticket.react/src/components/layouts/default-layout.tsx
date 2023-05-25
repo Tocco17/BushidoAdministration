@@ -23,7 +23,7 @@ const DefaultLayout = () => {
         <>
         <Container sx={mainContainer}>
 
-            <NavbarComponent routes={[allRoutes.home, allRoutes.details]} settings={[allRoutes.login, allRoutes.logout]} />
+            <NavbarComponent routes={[allRoutes.home, allRoutes.details, allRoutes.timesheet]} settings={[allRoutes.login, allRoutes.logout]} />
 
             <GoBackButton label="Torna indietro"/>
 

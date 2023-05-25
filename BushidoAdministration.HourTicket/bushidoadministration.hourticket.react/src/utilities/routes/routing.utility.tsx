@@ -4,7 +4,7 @@ import EmptyLayout from "../../components/layouts/empty-layout"
 import Role from "../../models/enums/role.enum"
 import { allRoutes, RouteInterface } from "./routes.utility"
 
-const {home, login, unauthorized, logout, notFound, details} = allRoutes
+const {home, login, unauthorized, logout, notFound, details, timesheet} = allRoutes
 
 export interface RouteListInterface {
     routes: RouteInterface[]
@@ -26,7 +26,7 @@ export const publicRoutes : RouteListInterface = {
 }
 
 export const privateNoRoleRoutes : PrivateRouteListInterface = {
-    routes: [details],
+    routes: [details, timesheet],
     allowedRoles: []
 }
 
@@ -35,7 +35,7 @@ const defaultLayoutRoutes : CompleteRouteListInterface = {
     element: <DefaultLayout />,
     publicRoutes: {routes: [home]},
     privateRoutes: [
-        {routes: [details], allowedRoles: []}
+        {routes: [details, timesheet], allowedRoles: []}
     ]
 }
 

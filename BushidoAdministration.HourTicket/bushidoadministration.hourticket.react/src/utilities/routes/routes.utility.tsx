@@ -6,6 +6,7 @@ import Home from "../../pages/home"
 import Login from "../../pages/auth/login"
 import Logout from "../../pages/auth/logout"
 import NoPage from "../../pages/no-page"
+import Timesheet from "../../pages/timesheet"
 
 export interface RouteInterface {
     name: string
@@ -49,6 +50,12 @@ const notFound : RouteInterface = {
     element: <NoPage />
 }
 
+const timesheet : RouteInterface = {
+    name: 'Timesheet',
+    path: '/timesheet',
+    element: <Timesheet />
+}
+
 export const allRoutes = {
     home,
     login,
@@ -56,6 +63,7 @@ export const allRoutes = {
     unauthorized,
     logout,
     notFound,
+    timesheet,
 }
 
 export const allPath = {
@@ -65,4 +73,5 @@ export const allPath = {
     unauthorized: unauthorized.path,
     logout: logout.path,
     notFound: notFound.path,
+    timesheet: timesheet.path,
 }
